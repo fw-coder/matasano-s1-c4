@@ -193,4 +193,23 @@
     End Sub
 
     
+    Private Sub Button2_Click(sender As System.Object, e As System.EventArgs) Handles Button2.Click
+        OpenFileDialog1.Title = "Please Select a File"
+        OpenFileDialog1.InitialDirectory = "C:temp"
+        OpenFileDialog1.ShowDialog()
+    End Sub
+
+    Private Sub OpenFileDialog1_FileOk(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles OpenFileDialog1.FileOk
+        Dim strm As System.IO.Stream
+
+        strm = OpenFileDialog1.OpenFile()
+
+        TextBox3.Text = OpenFileDialog1.FileName.ToString()
+
+        If Not (strm Is Nothing) Then
+            'insert code to read the file data
+            strm.Close()
+        End If
+
+    End Sub
 End Class
