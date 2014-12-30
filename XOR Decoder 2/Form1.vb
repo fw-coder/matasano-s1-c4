@@ -8,8 +8,6 @@
         ListBox1.Items.AddRange(str) ' Put the strings from the imported file into the list box
         R.Close()
 
-        ' test break
-
 
 
         ' Dim inputBytes As New List(Of String)()  ' this will be a list of bytes from the input textbox
