@@ -1,14 +1,6 @@
 ﻿Public Class Form1
 
     Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
-
-        ' Import strings from text file
-        Dim R As New IO.StreamReader(OpenFileDialog1.FileName)
-        Dim str As String() = R.ReadToEnd().Split(New String(vbLf)) ' Delimiter is vbLF (LineFeed)
-        ListBox1.Items.AddRange(str) ' Put the strings from the imported file into the list box
-        R.Close()
-
-
         ' Dim inputBytes As New List(Of String)()  ' this will be a list of bytes from the input textbox
         Dim topScore1 As Integer = 0
         Dim topScore2 As Integer = 0
@@ -58,13 +50,16 @@
         commonTriplets(6) = "THA"
 
         ' Insert a leading 0 if there is an odd number of characters in the input byte string
-        Dim stringData1 As String = TextBox1.Text 'contents of textbox1
+        Dim stringData1 As String = ListBox1.SelectedItem.ToString 'selected string in listbox
+
+
+
         If stringData1.Length Mod 2 = 1 Then
             stringData1 = "0" & stringData1
         End If
 
         'initializing textBox2
-        TextBox2.Text = "Results:" & Environment.NewLine & Environment.NewLine
+        TextBox3.Text = "Results:" & Environment.NewLine & Environment.NewLine
 
         For t As Integer = 0 To 255
             Dim resultString As String = String.Empty ' use to hold string for frequency analysis
@@ -76,7 +71,7 @@
                 testByte = "0" & testByte 'make sure testByte is an 8-bit binary string
             End While
 
-            TextBox2.Text = TextBox2.Text & "Key = " & t & Environment.NewLine
+            TextBox3.Text = TextBox3.Text & "Key = " & t & Environment.NewLine
 
             ' Convert each pair of characters to a byte
             For i As Integer = 0 To stringData1.Length - 1 Step 2
@@ -121,7 +116,7 @@
 
                 Dim com As String
                 com = ChrW(CInt(tempByte))
-                TextBox2.Text = TextBox2.Text & com
+                TextBox3.Text = TextBox3.Text & com
 
                 ' build a string in resultString to use for freq analysis
                 If tempByte = 0 Then
@@ -131,7 +126,7 @@
                 End If
 
             Next
-            TextBox2.Text = TextBox2.Text & Environment.NewLine & Environment.NewLine
+            TextBox3.Text = TextBox3.Text & Environment.NewLine & Environment.NewLine
 
             ' frequency analysis
             ' do two loops: one for common pairs and one for common triplets
@@ -212,12 +207,18 @@
 
         strm = OpenFileDialog1.OpenFile()
 
-        TextBox3.Text = OpenFileDialog1.FileName.ToString()
+        TextBox1.Text = OpenFileDialog1.FileName.ToString()
 
         If Not (strm Is Nothing) Then
             'insert code to read the file data
             strm.Close()
         End If
+
+        ' Import strings from text file
+        Dim R As New IO.StreamReader(OpenFileDialog1.FileName)
+        Dim str As String() = R.ReadToEnd().Split(New String(vbLf)) ' Delimiter is vbLF (LineFeed)
+        ListBox1.Items.AddRange(str) ' Put the strings from the imported file into the list box
+        R.Close()
 
     End Sub
 End Class
