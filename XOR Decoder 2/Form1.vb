@@ -1,7 +1,7 @@
 ﻿Public Class Form1
 
     Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles Button1.Click
-        Dim inputBytes As New List(Of String)()  ' this will be a list of bytes from the input textbox
+        ' Dim inputBytes As New List(Of String)()  ' this will be a list of bytes from the input textbox
         Dim topScore1 As Integer = 0
         Dim topScore2 As Integer = 0
         Dim topScore3 As Integer = 0
